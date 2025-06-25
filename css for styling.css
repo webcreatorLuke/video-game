@@ -1,1 +1,17 @@
+body {
+    /* Add some basic styling */
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
 
+#gameCanvas {
+    /* Style your game canvas */
+    border: 1px solid black;
+    margin: 20px auto;
+    display: block; /* Center the canvas */
+}
+
+#game-controls {
+    /* Style game controls */
+    margin-top: 10px;
+}
