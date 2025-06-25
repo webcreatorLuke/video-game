@@ -1,40 +1,60 @@
-// Google Sign-In Callback function
-function onSignIn(googleUser) {
-    var profile = googleUser.getBasicProfile();
-    console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-    console.log('Name: ' + profile.getName());
-    console.log('Image URL: ' + profile.getImageUrl());
-    console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+let cart = []; // Array to store cart items
 
-    // Now you can use the user's information to personalize the game or load their progress
-    // Send the ID token to your backend server for secure authentication
+function addToCart(product) {
+    // Check if product is already in cart
+    const existingItem = cart.find(item => item.id === product.id);
+
+    if (existingItem) {
+        existingItem.quantity++;
+    } else {
+        cart.push({ ...product, quantity: 1 });
+    }
+
+    updateCartDisplay();
 }
 
-// Game loop
-function gameLoop() {
-    // Update game state (e.g., move player, check collisions)
-    update();
+function updateCartDisplay() {
+    const cartItemsElement = document.getElementById("cart-items");
+    cartItemsElement.innerHTML = ""; // Clear existing cart items
 
-    // Render the game on the canvas
-    render();
+    let total = 0;
 
-    // Request the next frame
-    requestAnimationFrame(gameLoop);
+    cart.forEach(item => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+            <td>${item.name}</td>
+            <td>
+                <input type="number" value="${item.quantity}" min="1" onchange="updateCartItemQuantity(${item.id}, this.value)">
+            </td>
+            <td>$${item.price.toFixed(2)}</td>
+            <td>$${(item.price * item.quantity).toFixed(2)}</td>
+        `;
+        cartItemsElement.appendChild(row);
+        total += item.price * item.quantity;
+    });
+
+    document.getElementById("total-price").textContent = total.toFixed(2);
 }
 
-// Start the game loop
-gameLoop();
-
-// Placeholder functions for game updates and rendering
-function update() {
-    // Implement game logic here
+function updateCartItemQuantity(productId, quantity) {
+    const item = cart.find(item => item.id === productId);
+    if (item) {
+        item.quantity = parseInt(quantity);
+        updateCartDisplay();
+    }
 }
 
-function render() {
-    // Draw game elements on the canvas
-    var canvas = document.getElementById("gameCanvas");
-    var ctx = canvas.getContext("2d");
-    // Clear the canvas
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    // Draw game elements
-}
+// Add event listener to checkout button
+document.getElementById("checkout-button").addEventListener("click", () => {
+    // Send cart data to backend for processing
+    fetch("/checkout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(cart)
+    })
+    .then(response => response.json())
+    .then(data => {
+        // Redirect to Stripe checkout or handle payment response
+    })
+    .catch(error => console.error("Error during checkout:", error));
+});
