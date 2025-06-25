@@ -1,23 +1,32 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>My Awesome Web Game</title>
-    <meta name="google-signin-client_id" content="YOUR_CLIENT_ID"> <!-- Replace with your Google API Client ID -->
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
-    <link rel="stylesheet" href="style.css"> <!-- Link to your CSS file -->
+    <title>Shopping Cart</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Welcome to My Game!</h1>
+    <h1>Your Shopping Cart</h1>
 
-    <!-- Google Sign-In Button -->
-    <div class="g-signin2" data-onsuccess="onSignIn"></div>
+    <table>
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Subtotal</th>
+            </tr>
+        </thead>
+        <tbody id="cart-items">
+            <!-- Cart items will be dynamically added here by JavaScript -->
+        </tbody>
+    </table>
 
-    <canvas id="gameCanvas" width="800" height="600"></canvas> <!-- Game canvas -->
-
-    <div id="game-controls">
-        <!-- Game controls (buttons, etc.) will go here -->
+    <div id="cart-total">
+        Total: $<span id="total-price">0.00</span>
     </div>
 
-    <script src="script.js"></script> <!-- Link to your JavaScript file -->
+    <button id="checkout-button">Proceed to Checkout</button>
+
+    <script src="script.js"></script>
 </body>
 </html>
