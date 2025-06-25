@@ -1,31 +1,37 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Shopping Cart</title>
+    <title>My Awesome Shopping Website</title>
     <link rel="stylesheet" href="style.css">
+    <meta name="google-signin-client_id" content="YOUR_CLIENT_ID"> <!-- Replace with your Google API Client ID -->
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
 </head>
 <body>
-    <h1>Your Shopping Cart</h1>
 
-    <table>
-        <thead>
-            <tr>
-                <th>Product</th>
-                <th>Quantity</th>
-                <th>Price</th>
-                <th>Subtotal</th>
-            </tr>
-        </thead>
-        <tbody id="cart-items">
-            <!-- Cart items will be dynamically added here by JavaScript -->
-        </tbody>
-    </table>
+    <header>
+        <h1>My Awesome Shopping Website</h1>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="cart.html">Cart</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
 
-    <div id="cart-total">
-        Total: $<span id="total-price">0.00</span>
-    </div>
+    <main>
+        <!-- Google Sign-In Button -->
+        <div class="g_id_signin" data-type="standard" data-size="large" data-theme="outline" data-text="sign_in_with" data-shape="rectangular" data-logo_alignment="left"></div>
 
-    <button id="checkout-button">Proceed to Checkout</button>
+        <section id="product-listings">
+            <!-- Product listings will go here -->
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2025 My Awesome Shopping Website. All rights reserved.</p>
+    </footer>
 
     <script src="script.js"></script>
 </body>
