@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Awesome Web Game</title>
+    <meta name="google-signin-client_id" content="YOUR_CLIENT_ID"> <!-- Replace with your Google API Client ID -->
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <link rel="stylesheet" href="style.css"> <!-- Link to your CSS file -->
+</head>
+<body>
+    <h1>Welcome to My Game!</h1>
+
+    <!-- Google Sign-In Button -->
+    <div class="g-signin2" data-onsuccess="onSignIn"></div>
+
+    <canvas id="gameCanvas" width="800" height="600"></canvas> <!-- Game canvas -->
+
+    <div id="game-controls">
+        <!-- Game controls (buttons, etc.) will go here -->
+    </div>
+
+    <script src="script.js"></script> <!-- Link to your JavaScript file -->
+</body>
+</html>
